@@ -28,7 +28,6 @@ public class Inventory : MonoBehaviour
 
             items.Add(item);   
 
-
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
         }
@@ -45,4 +44,5 @@ public class Inventory : MonoBehaviour
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
     }
+
 }
