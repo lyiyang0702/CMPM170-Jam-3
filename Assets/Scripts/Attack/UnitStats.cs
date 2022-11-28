@@ -1,0 +1,76 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Collections;
+
+//UnitStats Script Gives Players and Monsters various stats
+public class UnitStats : MonoBehaviour, IComparable {
+
+	[SerializeField]
+	private Animator animator;
+
+	//DamageText UI placement. 
+	//Maybe can get Rid of???? IDK :P
+	[SerializeField]
+	private GameObject damageTextPrefab;
+	[SerializeField]
+	private Vector2 damageTextPosition;
+
+	//Stats of each unit.
+	//Probably don't need health.
+	public float health;
+	public float mana;
+	public float attack;
+	public float magic;
+	public float defense;
+	public float speed;
+
+	//
+	public int nextActTurn;
+
+	private bool dead = false;
+
+	private float currentExperience;
+
+	void Start() {
+		
+	}
+	//When the player gets hit the health of the player decreases.
+	//FIXME: Need to change subtracting health and change it to progress bar.
+	public void receiveDamage(float damage) {
+		this.health -= damage;
+		animator.Play ("Hit");
+		//Display amount of damage taken.
+		GameObject HUDCanvas = GameObject.Find ("HUDCanvas");
+		GameObject damageText = Instantiate (this.damageTextPrefab, HUDCanvas.transform) as GameObject;
+		damageText.GetComponent<Text> ().text = "" + damage;
+		damageText.transform.localPosition = this.damageTextPosition;
+		damageText.transform.localScale = new Vector2 (1.0f, 1.0f);
+		//If the Health is less then 0 the player character is dead.
+		if (this.health <= 0) {
+			this.dead = true;
+			this.gameObject.tag = "DeadUnit";
+			Destroy (this.gameObject);
+		}
+	}
+
+	//Calculate when the player can act 
+	public void calculateNextActTurn(int currentTurn) {
+		this.nextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
+	}
+
+	//Compares Speed stat
+	public int CompareTo(object otherStats) {
+		return nextActTurn.CompareTo (((UnitStats)otherStats).nextActTurn);
+	}
+
+	//Checks to see if player unit is alive.
+	public bool isDead() {
+		return this.dead;
+	}
+
+	//Declaration for when the player recieves EXP from battles.
+	public void receiveExperience(float experience) {
+		this.currentExperience += experience;
+	}
+}
