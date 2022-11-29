@@ -28,7 +28,6 @@ public class PlayerManager : MonoBehaviour
         }
 
         CurrentPlayer = Players[0];
-        
     }
 
     private void Update()
@@ -39,26 +38,35 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         ChangePlayer();
-        
+
     }
 
+    private void FixedUpdate()
+    {
+        //Players[1].transform.position = Vector3.MoveTowards(CurrentPlayer.transform.position + new Vector3(-1,1, 0), Players[1].transform.position, 3f * Time.deltaTime);
+        //Players[2].transform.position = Vector3.MoveTowards(CurrentPlayer.transform.position + new Vector3(1, 1, 0), Players[2].transform.position, 3f * Time.deltaTime);
+    }
     void ChangePlayer()
     {
         if (_isSwitched)
         {
             GameObject oldPlayer = CurrentPlayer;
             CurrentPlayer.GetComponent<PlayerMovement>().enabled = false;
+            //CurrentPlayer.GetComponent<PlayerController>().enabled = true;
             Players.Remove(oldPlayer);
+            //Change Current player to next player in the list
             CurrentPlayer = Players[0];
             Players.Add(oldPlayer);
             CurrentPlayer.GetComponent<PlayerMovement>().enabled = true;
+            //CurrentPlayer.GetComponent<PlayerController>().enabled = false;
             Debug.Log("current player is " + CurrentPlayer.name);
 
 
             // reload UI
             InventoryUI.instance.ReloadUI(CurrentPlayer);
         }
-        _isSwitched=false;
+        _isSwitched = false;
     }
+
 
 }
