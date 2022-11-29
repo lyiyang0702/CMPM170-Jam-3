@@ -19,31 +19,26 @@ public class PlayerManager : MonoBehaviour
     public GameObject CurrentPlayer;
 
     public bool _isSwitched = false;
-    [SerializeField]
-    float distance;
+
     private void Start()
     {
         for (int i = 1; i < Players.Count; i++)
         {
-            DisablePlayer(Players[i]);
+            Players[i].GetComponent<PlayerController>().enabled = false;
         }
 
         CurrentPlayer = Players[0];
     }
 
-    private void Update() { 
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
         {
             _isSwitched = true;
             return;
         }
         ChangePlayer();
-
-        for (int i = 1; i < Players.Count; i++)
-        {
-            PlayerKeepDistance(Players[i]);
-        }
+        
     }
 
     void ChangePlayer()
@@ -51,21 +46,21 @@ public class PlayerManager : MonoBehaviour
         if (_isSwitched)
         {
             GameObject oldPlayer = CurrentPlayer;
-            DisablePlayer(oldPlayer);
+            CurrentPlayer.GetComponent<PlayerController>().enabled = false;
             Players.Remove(oldPlayer);
-            //Change Current player to next player in the list
             CurrentPlayer = Players[0];
             Players.Add(oldPlayer);
-            EnablePlayer(CurrentPlayer);
+            CurrentPlayer.GetComponent<PlayerController>().enabled = true;
             Debug.Log("current player is " + CurrentPlayer.name);
 
 
             // reload UI
-            //InventoryUI.instance.ReloadUI(CurrentPlayer);
+            InventoryUI.instance.ReloadUI(CurrentPlayer);
         }
-        _isSwitched = false;
+        _isSwitched=false;
     }
 
+<<<<<<< HEAD
     void DisablePlayer(GameObject player)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
@@ -87,4 +82,6 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+=======
+>>>>>>> parent of 43e62f8 (fixed player movement bugs)
 }
