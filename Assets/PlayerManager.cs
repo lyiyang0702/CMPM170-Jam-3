@@ -60,7 +60,6 @@ public class PlayerManager : MonoBehaviour
         _isSwitched=false;
     }
 
-<<<<<<< HEAD
     void DisablePlayer(GameObject player)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
@@ -82,6 +81,4 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-=======
->>>>>>> parent of 43e62f8 (fixed player movement bugs)
 }
