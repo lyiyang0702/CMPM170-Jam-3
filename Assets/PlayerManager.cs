@@ -29,7 +29,6 @@ public class PlayerManager : MonoBehaviour
         }
 
         CurrentPlayer = Players[0];
-        
     }
 
     private void Update() { 
@@ -78,7 +77,6 @@ public class PlayerManager : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
     }
-
     void PlayerKeepDistance(GameObject player)
     {
         for (int i = 0; i < Players.Count; i++)

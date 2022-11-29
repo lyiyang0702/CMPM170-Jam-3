@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 //Script for the player input in the overworld.
 //Basic Velocity calculations depending on the input.
@@ -9,12 +10,14 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField]
 	private float speed;
 
-	//Get the value for the animator. 
-	[SerializeField]
-	private Animator animator;
+    //Get the value for the animator. 
+    [SerializeField]
+    private Animator animator;
 
-	//FixedUpdate gets the 
-	void FixedUpdate () {
+
+
+    //FixedUpdate gets the 
+    void FixedUpdate () {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
@@ -57,5 +60,8 @@ public class PlayerMovement : MonoBehaviour {
 
 		//Update the velocity of the Player Object in the overworld to navigate 
 		gameObject.GetComponent<Rigidbody2D> ().velocity = new Vector2 (newVelocityX, newVelocityY);
+
+
 	}
+
 }
