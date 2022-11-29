@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     {
         for (int i = 1; i < Players.Count; i++)
         {
-            Players[i].GetComponent<PlayerController>().enabled = false;
+            Players[i].GetComponent<PlayerMovement>().enabled = false;
         }
 
         CurrentPlayer = Players[0];
@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             _isSwitched = true;
             return;
@@ -47,11 +47,11 @@ public class PlayerManager : MonoBehaviour
         if (_isSwitched)
         {
             GameObject oldPlayer = CurrentPlayer;
-            CurrentPlayer.GetComponent<PlayerController>().enabled = false;
+            CurrentPlayer.GetComponent<PlayerMovement>().enabled = false;
             Players.Remove(oldPlayer);
             CurrentPlayer = Players[0];
             Players.Add(oldPlayer);
-            CurrentPlayer.GetComponent<PlayerController>().enabled = true;
+            CurrentPlayer.GetComponent<PlayerMovement>().enabled = true;
             Debug.Log("current player is " + CurrentPlayer.name);
 
 
