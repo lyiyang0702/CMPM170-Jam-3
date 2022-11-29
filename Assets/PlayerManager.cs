@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     {
         for (int i = 1; i < Players.Count; i++)
         {
-            Players[i].GetComponent<PlayerMovement>().enabled = false;
+            DisablePlayer(Players[i]);
         }
 
         CurrentPlayer = Players[0];
@@ -39,34 +39,52 @@ public class PlayerManager : MonoBehaviour
         }
         ChangePlayer();
 
+        for (int i = 1; i < Players.Count; i++)
+        {
+            PlayerKeepDistance(Players[i]);
+        }
     }
 
-    private void FixedUpdate()
-    {
-        //Players[1].transform.position = Vector3.MoveTowards(CurrentPlayer.transform.position + new Vector3(-1,1, 0), Players[1].transform.position, 3f * Time.deltaTime);
-        //Players[2].transform.position = Vector3.MoveTowards(CurrentPlayer.transform.position + new Vector3(1, 1, 0), Players[2].transform.position, 3f * Time.deltaTime);
-    }
     void ChangePlayer()
     {
         if (_isSwitched)
         {
             GameObject oldPlayer = CurrentPlayer;
-            CurrentPlayer.GetComponent<PlayerMovement>().enabled = false;
-            //CurrentPlayer.GetComponent<PlayerController>().enabled = true;
+            DisablePlayer(oldPlayer);
             Players.Remove(oldPlayer);
             //Change Current player to next player in the list
             CurrentPlayer = Players[0];
             Players.Add(oldPlayer);
-            CurrentPlayer.GetComponent<PlayerMovement>().enabled = true;
-            //CurrentPlayer.GetComponent<PlayerController>().enabled = false;
+            EnablePlayer(CurrentPlayer);
             Debug.Log("current player is " + CurrentPlayer.name);
 
 
             // reload UI
-            InventoryUI.instance.ReloadUI(CurrentPlayer);
+            //InventoryUI.instance.ReloadUI(CurrentPlayer);
         }
         _isSwitched = false;
     }
 
+    void DisablePlayer(GameObject player)
+    {
+        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<BoxCollider2D>().enabled = false;
+    }
 
+    void EnablePlayer (GameObject player)
+    {
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+    }
+    
+    void PlayerKeepDistance(GameObject player)
+    {
+        for (int i = 0; i < Players.Count; i++)
+        {
+            if (player != Players[i])
+            {
+                player.transform.position = (player.transform.position - Players[i].transform.position).normalized * 2f + Players[i].transform.position;
+            }
+        }
+    }
 }
