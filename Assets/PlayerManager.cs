@@ -31,8 +31,8 @@ public class PlayerManager : MonoBehaviour
         CurrentPlayer = Players[0];
     }
 
-    private void Update()
-    {
+    private void Update() { 
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             _isSwitched = true;
@@ -72,12 +72,11 @@ public class PlayerManager : MonoBehaviour
         player.GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    void EnablePlayer (GameObject player)
+    void EnablePlayer(GameObject player)
     {
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
     }
-    
     void PlayerKeepDistance(GameObject player)
     {
         for (int i = 0; i < Players.Count; i++)
