@@ -7,7 +7,8 @@ public class PlayerFollow : MonoBehaviour
     Rigidbody2D rb;
     Rigidbody2D targetRb;
     GameObject target;
-    float speed = 2f;
+    [SerializeField]
+    float speed;
     Vector3 directionToTarget;
     // Start is called before the first frame update
     void Start()

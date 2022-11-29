@@ -19,7 +19,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject CurrentPlayer;
 
     public bool _isSwitched = false;
-
+    [SerializeField]
+    float distance;
     private void Start()
     {
         for (int i = 1; i < Players.Count; i++)
@@ -83,7 +84,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (player != Players[i])
             {
-                player.transform.position = (player.transform.position - Players[i].transform.position).normalized * 2f + Players[i].transform.position;
+                player.transform.position = (player.transform.position - Players[i].transform.position).normalized * distance + Players[i].transform.position;
             }
         }
     }
