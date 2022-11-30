@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
 
 
             // reload UI
-            //InventoryUI.instance.ReloadUI(currentPlayerUnit);
+            InventoryUI.instance.ReloadUI(currentPlayerUnit);
         }
         _isSwitched = false;
     }
