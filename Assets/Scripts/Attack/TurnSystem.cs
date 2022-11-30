@@ -7,8 +7,6 @@ using System.Collections.Generic;
 //Turn System Script is the 
 public class TurnSystem : MonoBehaviour {
 
-	private float currHP;
-	private int RemainingTurns;
 	private List<UnitStats> unitsStats;
 
 	private GameObject playerParty;
@@ -36,12 +34,6 @@ public class TurnSystem : MonoBehaviour {
 			unitsStats.Add (currentUnitStats);
 		}
 
-		foreach( var x in unitsStats) {
-			Debug.Log( x.ToString());
-			RemainingTurns ++;
-		}
-
-		RemainingTurns = RemainingTurns * 5;
 		//Stats are sorted here.
 		unitsStats.Sort ();
 
@@ -55,46 +47,21 @@ public class TurnSystem : MonoBehaviour {
 
 	//Next turn determines when next
 	public void nextTurn() {
-		
-		Debug.Log("Remaing Turns = " + RemainingTurns);
-		GameObject[] FanBaseBar = GameObject.FindGameObjectsWithTag ("TotalHealth");
-		
-		//If the Opponent Band Knocks out
-		if (FanBaseBar.Length == 0) {
-			Debug.Log("Game Over, Player Lost");
+		//FIXME
+		//We probably don't need this area because we are not defeating all enemies as a win condition
+		//Or Lose when all players are dead.
+		GameObject[] remainingEnemyUnits = GameObject.FindGameObjectsWithTag ("EnemyUnit");
+		if (remainingEnemyUnits.Length == 0) {
+			this.enemyEncounter.GetComponent<CollectReward> ().collectReward ();
+			SceneManager.LoadScene ("Town");
+		}
+
+		GameObject[] remainingPlayerUnits = GameObject.FindGameObjectsWithTag ("PlayerUnit");
+		if (remainingPlayerUnits.Length == 0) {
 			SceneManager.LoadScene("Title");
 		}
 
-		else{
-			GameObject FanBar = GameObject.Find("FanBar");
-			UnitStats CurrentHealth = FanBar.GetComponent<UnitStats> ();
-			currHP = CurrentHealth.returnHealth();
-			Debug.Log("Right now the fanbase is " + currHP);
 
-			GameObject FBUI = GameObject.Find("FanBaseBar");
-			Vector2 objectScale = FBUI.transform.localScale;
-			FBUI.transform.localScale = new Vector2(objectScale.x * (currHP/200) ,  objectScale.y);
-			//FIXME
-			//We probably don't need this area because we are not defeating all enemies as a win condition
-			//Or Lose when all players are dead.
-			if (currHP >= 400) {
-				Debug.Log("VICTORY! Player wins!");
-				this.enemyEncounter.GetComponent<CollectReward> ().collectReward ();
-				SceneManager.LoadScene ("Town");
-			}
-
-			
-
-			//If One band does not get a knock out before 5 turns, see which team has more points.
-			if(RemainingTurns == 0){
-				if(currHP >= 200){
-					Debug.Log("PLAYER WINSSSSS!!!!");
-				}
-				else if(currHP < 200){
-					Debug.Log("GAME OVERRRRR!!!!");
-				}
-			}
-		}
 		UnitStats currentUnitStats = unitsStats [0];
 		unitsStats.Remove (currentUnitStats);
 		//If the current Unit is alive, calculate who will go next.
@@ -112,12 +79,9 @@ public class TurnSystem : MonoBehaviour {
 			} else {
 				currentUnit.GetComponent<EnemyUnitAction> ().act ();
 			}
-			RemainingTurns--;
 		} else {
 			//Go to next unit
-			RemainingTurns--;
 			this.nextTurn ();
-			
 		}
 	}
 }

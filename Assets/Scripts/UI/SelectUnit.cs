@@ -27,10 +27,8 @@ public class SelectUnit : MonoBehaviour {
 		this.currentUnit.GetComponent<PlayerUnitAction> ().updateHUD ();
 	}
 
-	//Select attack based off of the number. 
-	//The integer determines which attack the player chooses. 
-	public void selectAttack(int Attacktype) {
-		this.currentUnit.GetComponent<PlayerUnitAction> ().selectAttack (Attacktype);
+	public void selectAttack(bool physical) {
+		this.currentUnit.GetComponent<PlayerUnitAction> ().selectAttack (physical);
 
 		this.actionsMenu.SetActive (false);
 		this.enemyUnitsMenu.SetActive (true);
@@ -39,8 +37,7 @@ public class SelectUnit : MonoBehaviour {
 	public void attackEnemyTarget(GameObject target) {
 		this.actionsMenu.SetActive (false);
 		this.enemyUnitsMenu.SetActive (false);
-		GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag ("TotalHealth");
-		Debug.Log("Attack Prefab YOLOOOO");
-		this.currentUnit.GetComponent<PlayerUnitAction>().act (possibleTargets[0]);
+
+		this.currentUnit.GetComponent<PlayerUnitAction>().act (target);
 	}
 }
