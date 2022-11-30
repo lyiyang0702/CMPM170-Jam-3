@@ -69,6 +69,9 @@ public class UnitStats : MonoBehaviour, IComparable {
 		return this.dead;
 	}
 
+	public float returnHealth() {
+		return this.health;
+	}
 	//Declaration for when the player recieves EXP from battles.
 	public void receiveExperience(float experience) {
 		this.currentExperience += experience;
