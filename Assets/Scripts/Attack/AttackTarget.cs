@@ -37,7 +37,7 @@ public class AttackTarget : MonoBehaviour {
 
 	//Possibly get rid of the targetStats and only take the attack portion (E.g. Get rid of Defence)
 	//FIX ME
-	public void hit(GameObject target) {
+	public void hit(GameObject target, bool isEnemy) {
 		//Get Stats from player and Enemy
 		UnitStats ownerStats = this.owner.GetComponent<UnitStats> ();
 		UnitStats targetStats = target.GetComponent<UnitStats> ();
@@ -56,6 +56,13 @@ public class AttackTarget : MonoBehaviour {
 			//Final Damage of the attack.
 			damage = Mathf.Max(0, damage - (defenseMultiplier * targetStats.defense));
 
+			if(!isEnemy){
+				Debug.Log("Player Attacks!");
+				damage = damage *-1;
+			}
+			else{
+				Debug.Log("Enemy Strikes Back!");
+			}
 			//Call Animator and play attack animation.
 			this.owner.GetComponent<Animator> ().Play (this.attackAnimation);
 			//Enemy Receives Damage
