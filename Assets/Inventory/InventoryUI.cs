@@ -13,12 +13,14 @@ public class InventoryUI : MonoBehaviour
 
     public Transform itemsParent;
     public GameObject inventoryUI;
+
+    public Inventory inventory;
     [SerializeField]
-    Inventory inventory;
     InventorySlot[] slots;
+
     private void Start()
     {
-        inventory = PlayerManager.instance.CurrentPlayer.GetComponent<Inventory>();
+        //inventory = PlayerManager.instance.Players[0].GetComponent<Inventory>();
         inventory.onItemChangedCallback += UpdateUI;
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }

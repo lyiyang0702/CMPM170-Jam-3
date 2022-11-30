@@ -11,8 +11,8 @@ public class StartBattle : MonoBehaviour {
 		DontDestroyOnLoad (this.gameObject);
 
 		SceneManager.sceneLoaded += OnSceneLoaded;
-
 		this.gameObject.SetActive (false);
+		
 	}
 
 	private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -22,8 +22,10 @@ public class StartBattle : MonoBehaviour {
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 			Destroy (this.gameObject);
 		} else {
-			this.gameObject.SetActive(scene.name == "Battle");
-		}
+            //this.gameObject.SetActive(scene.name == "Battle");
+            //this.gameObject.SetActive(scene.name == "Town");
+            this.gameObject.SetActive(true);
+        }
 	}
 
 }

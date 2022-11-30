@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ItemPickup : Interactable
@@ -14,13 +15,18 @@ public class ItemPickup : Interactable
 
     private void PickUp()
     {
-        Debug.Log (PlayerManager.instance.CurrentPlayer.name + "Picking up " + item.name);
-        bool wasPickedUp = PlayerManager.instance.CurrentPlayer.GetComponent<Inventory>().Add(item);
+        //Debug.Log(PlayerManager.instance.CurrentPlayer.name + "Picking up " + item.name);
+        //bool wasPickedUp = PlayerManager.instance.CurrentPlayer.GetComponent<Inventory>().Add(item);
+        //if (wasPickedUp)
+        //{
+        //    Destroy(gameObject);
+        //}
+
+        bool wasPickedUp = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>().Add(item);
         if (wasPickedUp)
         {
             Destroy(gameObject);
         }
 
     }
-
 }
