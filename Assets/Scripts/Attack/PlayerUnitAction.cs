@@ -16,6 +16,9 @@ public class PlayerUnitAction : MonoBehaviour {
 	[SerializeField]
 	private GameObject magicalAttack;
 
+	[SerializeField]
+	private GameObject elementAttack;
+
 	private GameObject currentAttack;
 
 	[SerializeField]
@@ -25,21 +28,37 @@ public class PlayerUnitAction : MonoBehaviour {
 	void Awake () {
 		this.physicalAttack = Instantiate (this.physicalAttack, this.transform) as GameObject;
 		this.magicalAttack = Instantiate (this.magicalAttack, this.transform) as GameObject;
+	    this.elementAttack = Instantiate (this.elementAttack, this.transform) as GameObject;
 
 		this.physicalAttack.GetComponent<AttackTarget> ().owner = this.gameObject;
 		this.magicalAttack.GetComponent<AttackTarget> ().owner = this.gameObject;
+		this.elementAttack.GetComponent<AttackTarget> ().owner = this.gameObject;
 
 		this.currentAttack = this.physicalAttack;
 	}
 
 	//Selecting the attack and check to see if the player choose a magic or physical attack.
-	public void selectAttack(bool physical) {
+	public void selectAttack(int physical) {
+		if (physical == 0){
+			Debug.Log("Attack is Physical");
+			this.currentAttack = this.physicalAttack;
+		}
+		else if (physical == 1){
+			this.currentAttack = this.magicalAttack;
+			Debug.Log("Attack is Magic");
+		}
+		else if (physical == 2){
+			this.currentAttack = this.elementAttack;
+			Debug.Log("Attack is Element");
+		}
+		/*
 		this.currentAttack = (physical) ? this.physicalAttack : this.magicalAttack;
+		*/
 	}
 
 	//Initialize the attack and calculate damage.
 	public void act(GameObject target) {
-		this.currentAttack.GetComponent<AttackTarget> ().hit (target);
+		this.currentAttack.GetComponent<AttackTarget> ().hit (target, false);
 	}
 
 	//Update the HUD. Make invisible icons appear.
@@ -52,5 +71,6 @@ public class PlayerUnitAction : MonoBehaviour {
 
 		GameObject playerUnitManaBar = GameObject.Find ("PlayerUnitManaBar") as GameObject;
 		playerUnitManaBar.GetComponent<ShowUnitMana> ().changeUnit (this.gameObject);
+
 	}
 }
