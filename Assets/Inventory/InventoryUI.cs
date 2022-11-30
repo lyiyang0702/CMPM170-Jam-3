@@ -18,7 +18,7 @@ public class InventoryUI : MonoBehaviour
     InventorySlot[] slots;
     private void Start()
     {
-        inventory = PlayerManager.instance.CurrentPlayer.GetComponent<Inventory>();
+        inventory = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>();
         inventory.onItemChangedCallback += UpdateUI;
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }

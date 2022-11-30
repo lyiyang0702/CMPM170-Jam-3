@@ -17,8 +17,9 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> Players = new List<GameObject>();
 
     public GameObject CurrentPlayer;
-
+    public GameObject currentPlayerUnit;
     public bool _isSwitched = false;
+    GameObject[] playerUnits;
     [SerializeField]
     float distance;
     private void Start()
@@ -29,6 +30,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         CurrentPlayer = Players[0];
+
+        playerUnits = GameObject.FindGameObjectsWithTag("PlayerUnit");
     }
 
     private void Update()
@@ -44,6 +47,8 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerKeepDistance(Players[i]);
         }
+
+        CheckCurrentPlayerInBattle();
     }
 
     void ChangePlayer()
@@ -61,31 +66,56 @@ public class PlayerManager : MonoBehaviour
 
 
             // reload UI
-            //InventoryUI.instance.ReloadUI(CurrentPlayer);
+            InventoryUI.instance.ReloadUI(currentPlayerUnit);
         }
         _isSwitched = false;
     }
 
     void DisablePlayer(GameObject player)
     {
-        player.GetComponent<PlayerMovement>().enabled = false;
-        player.GetComponent<BoxCollider2D>().enabled = false;
+        if (player)
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<BoxCollider2D>().enabled = false;
+        }
+
     }
 
-    void EnablePlayer (GameObject player)
+    void EnablePlayer(GameObject player)
     {
-        player.GetComponent<PlayerMovement>().enabled = true;
-        player.GetComponent<BoxCollider2D>().enabled = true;
+        if (player)
+        {
+            player.GetComponent<PlayerMovement>().enabled = true;
+            player.GetComponent<BoxCollider2D>().enabled = true;
+        }
+
     }
-    
+
     void PlayerKeepDistance(GameObject player)
     {
-        for (int i = 0; i < Players.Count; i++)
+        if (player)
         {
-            if (player != Players[i])
+            for (int i = 0; i < Players.Count; i++)
             {
-                player.transform.position = (player.transform.position - Players[i].transform.position).normalized * distance + Players[i].transform.position;
+                if (player != Players[i])
+                {
+                    player.transform.position = (player.transform.position - Players[i].transform.position).normalized * distance + Players[i].transform.position;
+                }
             }
         }
+
+    }
+
+    void CheckCurrentPlayerInBattle()
+    {
+        foreach (GameObject playerUnit in playerUnits)
+        {
+
+            if (playerUnit.name == CurrentPlayer.name)
+            {
+                currentPlayerUnit = playerUnit;
+            }
+        }
+
     }
 }
