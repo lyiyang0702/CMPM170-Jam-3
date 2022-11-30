@@ -5,10 +5,9 @@ using System.Collections;
 //AddButtonCallBack is a script used for making a button have  
 public class AddButtonCallback : MonoBehaviour {
 
-	//Gets the integer depending on the Attack. 
-	//1 = 
+	//Gets the boolean from the user's input whether or not the skill is a magic based one or a physical based one.
 	[SerializeField]
-	private int AttackType;
+	private bool physical;
 
 	//When the Button is clicked on, initiate player attack.
 	void Start () {
@@ -17,7 +16,7 @@ public class AddButtonCallback : MonoBehaviour {
 
 	private void addCallback() {
 		GameObject playerParty = GameObject.Find ("PlayerParty");
-		playerParty.GetComponent<SelectUnit> ().selectAttack (this.AttackType);
+		playerParty.GetComponent<SelectUnit> ().selectAttack (this.physical);
 	}
 
 }
