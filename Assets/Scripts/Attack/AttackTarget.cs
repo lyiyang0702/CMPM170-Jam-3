@@ -32,9 +32,13 @@ public class AttackTarget : MonoBehaviour {
 	[SerializeField]
 	private float maxDefenseMultiplier;
 	
+	[SerializeField]
+	private int buffCode;
+
+
 	//Function hit.
 	//Targets an enemy unit and 
-
+	
 	//Possibly get rid of the targetStats and only take the attack portion (E.g. Get rid of Defence)
 	//FIX ME
 	public void hit(GameObject target, bool isEnemy) {
@@ -56,9 +60,15 @@ public class AttackTarget : MonoBehaviour {
 			//Final Damage of the attack.
 			damage = Mathf.Max(0, damage - (defenseMultiplier * targetStats.defense));
 
+			
 			if(!isEnemy){
 				Debug.Log("Player Attacks!");
 				damage = damage *-1;
+				
+				if(buffCode == 1){
+					Debug.Log("Buff Attack by 2");
+					damage = damage * 2;
+				}
 			}
 			else{
 				Debug.Log("Enemy Strikes Back!");

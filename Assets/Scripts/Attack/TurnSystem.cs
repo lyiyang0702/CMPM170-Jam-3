@@ -73,7 +73,7 @@ public class TurnSystem : MonoBehaviour {
 
 			GameObject FBUI = GameObject.Find("FanBaseBar");
 			Vector2 objectScale = FBUI.transform.localScale;
-			FBUI.transform.localScale = new Vector2(objectScale.x * (currHP/200) ,  objectScale.y);
+			FBUI.transform.localScale = new Vector2((currHP/200) ,  objectScale.y);
 			//FIXME
 			//We probably don't need this area because we are not defeating all enemies as a win condition
 			//Or Lose when all players are dead.
