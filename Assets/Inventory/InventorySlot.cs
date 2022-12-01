@@ -21,7 +21,7 @@ public class InventorySlot : MonoBehaviour
 
     public void UseItem()
     {
-        GameObject player = PlayerManager.instance.CurrentPlayer;
+        GameObject player = PlayerManager.instance.currentPlayerUnit;
         if (item != null)
         {
             item.Use(player);
