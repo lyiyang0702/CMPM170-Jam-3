@@ -108,7 +108,14 @@ public class TurnSystem : MonoBehaviour {
 			//If so, make the player choose the actions.
 			//Else, the AI chooses the action.
 			if (currentUnit.tag == "PlayerUnit") {
-				this.playerParty.GetComponent<SelectUnit> ().selectCurrentUnit (currentUnit.gameObject);
+
+				// reload UI when player unit changes
+				if (currentUnit)
+				{
+                    InventoryBattleUI.instance.ReloadUI(currentUnit);
+                }
+				
+                this.playerParty.GetComponent<SelectUnit> ().selectCurrentUnit (currentUnit.gameObject);
 			} else {
 				currentUnit.GetComponent<EnemyUnitAction> ().act ();
 			}

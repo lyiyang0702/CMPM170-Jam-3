@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
         CurrentPlayer = Players[0];
 
         playerUnits = GameObject.FindGameObjectsWithTag("PlayerUnit");
+        CheckCurrentPlayerInBattle();
     }
 
     private void Update()
@@ -48,7 +49,7 @@ public class PlayerManager : MonoBehaviour
             PlayerKeepDistance(Players[i]);
         }
 
-        CheckCurrentPlayerInBattle();
+        
     }
 
     void ChangePlayer()
@@ -64,7 +65,7 @@ public class PlayerManager : MonoBehaviour
             EnablePlayer(CurrentPlayer);
             Debug.Log("current player is " + CurrentPlayer.name);
 
-
+            CheckCurrentPlayerInBattle();
             // reload UI
             InventoryUI.instance.ReloadUI(currentPlayerUnit);
         }

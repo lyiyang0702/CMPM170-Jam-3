@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryBattleUI : MonoBehaviour
 {
     #region Singleton
-    public static InventoryUI instance;
+    public static InventoryBattleUI instance;
 
     private void Awake()
     {
@@ -20,11 +20,6 @@ public class InventoryUI : MonoBehaviour
     {
         //DontDestroyOnLoad(this.gameObject);
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-    }
-    private void FixedUpdate()
-    {
-        inventory = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>();
-        inventory.onItemChangedCallback += UpdateUI;
     }
     public void ReloadUI(GameObject CurrentPlayer)
     {
