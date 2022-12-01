@@ -36,8 +36,12 @@ public class UnitStats : MonoBehaviour, IComparable {
 
     EquipmentManager equipmentManager;
     void Start() {
-        equipmentManager = GetComponent<EquipmentManager>();
-        equipmentManager.onEquipmentChanged += OnEquipmentChanged;
+		if (this.gameObject.CompareTag("PlayerUnit"))
+		{
+            equipmentManager = GetComponent<EquipmentManager>();
+            equipmentManager.onEquipmentChanged += OnEquipmentChanged;
+        }
+
     }
 	//When the player gets hit the health of the player decreases.
 	//FIXME: Need to change subtracting health and change it to progress bar.

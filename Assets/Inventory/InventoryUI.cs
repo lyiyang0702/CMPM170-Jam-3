@@ -23,7 +23,7 @@ public class InventoryUI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        inventory = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>();
+        //inventory = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>();
         inventory.onItemChangedCallback += UpdateUI;
     }
     public void ReloadUI(GameObject CurrentPlayer)
