@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using static EquipmentManager;
 
 //UnitStats Script Gives Players and Monsters various stats
 public class UnitStats : MonoBehaviour, IComparable {
@@ -44,9 +45,17 @@ public class UnitStats : MonoBehaviour, IComparable {
 	public bool ThunderDance;
 
 	public int HurricaneVortex;
-	void Start() {
-		
-	}
+	
+
+    EquipmentManager equipmentManager;
+    void Start() {
+		if (this.gameObject.CompareTag("PlayerUnit"))
+		{
+            equipmentManager = GetComponent<EquipmentManager>();
+            equipmentManager.onEquipmentChanged += OnEquipmentChanged;
+        }
+
+    }
 	//When the player gets hit the health of the player decreases.
 	//FIXME: Need to change subtracting health and change it to progress bar.
 	public void receiveDamage(float damage) {
@@ -107,4 +116,17 @@ public class UnitStats : MonoBehaviour, IComparable {
 	public bool emberEffect(){
 		return this.EmberSong;
 	}
+    void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
+    {
+        if (newItem != null)
+        {
+			this.attack += newItem.damageModifier;
+			this.defense += newItem.armorModifier;
+        }
+        if (oldItem != null)
+        {
+            this.attack -= newItem.damageModifier;
+            this.defense -= newItem.armorModifier;
+        }
+    }
 }

@@ -18,16 +18,19 @@ public class InventoryUI : MonoBehaviour
     InventorySlot[] slots;
     private void Start()
     {
-        inventory = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>();
-        inventory.onItemChangedCallback += UpdateUI;
+        //DontDestroyOnLoad(this.gameObject);
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }
-
+    private void FixedUpdate()
+    {
+        //inventory = PlayerManager.instance.currentPlayerUnit.GetComponent<Inventory>();
+        inventory.onItemChangedCallback += UpdateUI;
+    }
     public void ReloadUI(GameObject CurrentPlayer)
     {
         inventory = CurrentPlayer.GetComponent<Inventory>();
         inventory.onItemChangedCallback += UpdateUI;
-
+        Debug.Log(CurrentPlayer.name);
         UpdateUI();
     }
     void UpdateUI()
