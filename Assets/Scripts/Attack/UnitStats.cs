@@ -119,12 +119,20 @@ public class UnitStats : MonoBehaviour, IComparable {
     {
         if (newItem != null)
         {
+			GameObject elementAttack = GetComponent<PlayerUnitAction>().elementAttack;
+			GameObject elementAttack2 = GetComponent<PlayerUnitAction>().elementAttack2;
+			GameObject elementAttack3 = GetComponent<PlayerUnitAction>().elementAttack3;
             this.attack += newItem.damageModifier;
             this.defense += newItem.armorModifier;
 			this.element = newItem.elementModifier;
-			GetComponent<PlayerUnitAction>().elementAttack = newItem.ElementAttacks[0];
-			GetComponent<PlayerUnitAction>().elementAttack2 = newItem.ElementAttacks[1];
-			GetComponent<PlayerUnitAction>().elementAttack3 = newItem.ElementAttacks[2];
+            elementAttack  = newItem.ElementAttacks[0];
+            elementAttack2  = newItem.ElementAttacks[1];
+            elementAttack3  = newItem.ElementAttacks[2];
+			elementAttack.GetComponent<AttackTarget>().owner = this.gameObject;
+			elementAttack2.GetComponent<AttackTarget>().owner = this.gameObject;
+			elementAttack3.GetComponent<AttackTarget>().owner = this.gameObject;
+
+
         }
         if (oldItem != null)
         {

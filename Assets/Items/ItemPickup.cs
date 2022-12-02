@@ -57,5 +57,4 @@ public class ItemPickup : Interactable
         return null;
     }
 
-    
 }
