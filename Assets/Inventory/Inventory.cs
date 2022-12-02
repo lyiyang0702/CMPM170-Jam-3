@@ -26,10 +26,11 @@ public class Inventory : MonoBehaviour
                 return false;
             }
 
-            items.Add(item);   
-
+            items.Add(item);
+            
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
+            item.Use(this.gameObject);
         }
 
         return true;
