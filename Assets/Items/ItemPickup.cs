@@ -8,7 +8,6 @@ public class ItemPickup : Interactable
     public Item item;
     bool wasPickedUp;
     GameObject[] playerUnits;
-
     private void Start()
     {
         playerUnits = GameObject.FindGameObjectsWithTag("PlayerUnit");
@@ -33,18 +32,20 @@ public class ItemPickup : Interactable
     {
         if (item.name == "Guitar")
         {
-            wasPickedUp = GetInventory("WarriorUnit").GetComponent<Inventory>().Add(item);
+            wasPickedUp = GetPlayerUnit("WarriorUnit").GetComponent<Inventory>().Add(item);
+
         }
         else if (item.name == "Violin")
         {
-            wasPickedUp = GetInventory("MageUnit").GetComponent<Inventory>().Add(item);
+            wasPickedUp = GetPlayerUnit("MageUnit").GetComponent<Inventory>().Add(item);
         }
         else if (item.name == "Drum")
         {
-            wasPickedUp = GetInventory("ThirdUnit").GetComponent<Inventory>().Add(item);
+            wasPickedUp = GetPlayerUnit("ThirdUnit").GetComponent<Inventory>().Add(item);
+
         }
     }
-    GameObject GetInventory(string playerUnitName)
+    GameObject GetPlayerUnit(string playerUnitName)
     {
         foreach (GameObject playerUnit in playerUnits)
         {
@@ -55,4 +56,6 @@ public class ItemPickup : Interactable
         }
         return null;
     }
+
+    
 }
