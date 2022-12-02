@@ -22,21 +22,36 @@ public class SelectUnit : MonoBehaviour {
 	public void selectCurrentUnit(GameObject unit) {
 		this.currentUnit = unit;
 
+		
+
 		this.actionsMenu.SetActive (true);
 
 		this.currentUnit.GetComponent<PlayerUnitAction> ().updateHUD ();
+		GameObject[] descriptions = GameObject.FindGameObjectsWithTag ("ActionText");
+		foreach (GameObject x in descriptions) {
+				x.SetActive(false);
+		}
 	}
 
 	//Select attack based off of the number. 
 	//The integer determines which attack the player chooses. 
 	public void selectAttack(int Attacktype) {
 		this.currentUnit.GetComponent<PlayerUnitAction> ().selectAttack (Attacktype);
+		GameObject[] List = GameObject.FindGameObjectsWithTag ("ActionText");
+		foreach (GameObject y in List) {
+				y.SetActive(false);
+		}
 
 		this.actionsMenu.SetActive (false);
 		this.enemyUnitsMenu.SetActive (true);
 	}
 
 	public void attackEnemyTarget(GameObject target) {
+		GameObject[] Zeta = GameObject.FindGameObjectsWithTag ("ActionText");
+		foreach (GameObject z in Zeta) {
+				z.SetActive(false);
+		}
+
 		this.actionsMenu.SetActive (false);
 		this.enemyUnitsMenu.SetActive (false);
 		GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag ("TotalHealth");

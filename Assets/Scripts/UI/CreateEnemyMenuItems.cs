@@ -28,12 +28,12 @@ public class CreateEnemyMenuItems : MonoBehaviour {
 		
 		//GameObject[] Test = GameObject.FindGameObjectsWithTag ("TotalHealth");
 		
-		Vector2 nextPosition = new Vector2 (this.initialPosition.x + (existingItems.Length * this.itemDimensions.x), this.initialPosition.y);
+		Vector2 nextPosition = new Vector2 (this.initialPosition.x + (existingItems.Length * this.itemDimensions.x), this.initialPosition.y + 100);
 		//If there is more than 1 enemy, move the Position and the scale of the icons.
 		GameObject targetEnemyUnit = Instantiate (this.targetEnemyUnitPrefab, enemyUnitsMenu.transform) as GameObject;
 		targetEnemyUnit.name = "Target" + this.gameObject.name;	
 		targetEnemyUnit.transform.localPosition = nextPosition;
-		targetEnemyUnit.transform.localScale = new Vector2 (0.7f, 0.7f);
+		targetEnemyUnit.transform.localScale = new Vector2 (2f, 1f);
 		//If the Mouse is over the enemy icon, on click attack the selected enemy.
 		targetEnemyUnit.GetComponent<Button> ().onClick.AddListener (() => 
 			selectEnemyTarget());
