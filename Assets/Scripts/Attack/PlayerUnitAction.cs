@@ -14,16 +14,13 @@ public class PlayerUnitAction : MonoBehaviour {
 	private GameObject physicalAttack;
 
 	[SerializeField]
-	private GameObject magicalAttack;
+    public GameObject magicalAttack;
 
-	[SerializeField]
-	private GameObject elementAttack;
+	public GameObject elementAttack;
 
-	[SerializeField]
-	private GameObject elementAttack2;
+	public GameObject elementAttack2;
 
-	[SerializeField]
-	private GameObject elementAttack3;
+	public GameObject elementAttack3;
 
 	private GameObject currentAttack;
 
