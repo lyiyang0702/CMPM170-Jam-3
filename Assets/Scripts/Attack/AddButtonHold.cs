@@ -54,7 +54,7 @@ public class AddButtonHold : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 				Debug.Log("Earth Element");
 			 }
 			 else if(Element == 5){
-				UItext5.SetActive(true);
+				UItext6.SetActive(true);
 				Debug.Log("Thunder Element");
 
 			 }
