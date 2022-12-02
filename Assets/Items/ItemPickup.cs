@@ -39,10 +39,7 @@ public class ItemPickup : Interactable
         {
             wasPickedUp = GetInventory("MageUnit").GetComponent<Inventory>().Add(item);
         }
-        else if (item.name == "Drum")
-        {
-            wasPickedUp = GetInventory("ThirdUnit").GetComponent<Inventory>().Add(item);
-        }
+        // add third player here
     }
     GameObject GetInventory(string playerUnitName)
     {
