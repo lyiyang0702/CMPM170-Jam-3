@@ -121,6 +121,7 @@ public class UnitStats : MonoBehaviour, IComparable {
         {
             this.attack += newItem.damageModifier;
             this.defense += newItem.armorModifier;
+			this.element = newItem.elementModifier;
 			GetComponent<PlayerUnitAction>().elementAttack = newItem.ElementAttacks[0];
 			GetComponent<PlayerUnitAction>().elementAttack2 = newItem.ElementAttacks[1];
 			GetComponent<PlayerUnitAction>().elementAttack3 = newItem.ElementAttacks[2];
