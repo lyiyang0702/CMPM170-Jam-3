@@ -73,7 +73,7 @@ public class AddButtonHold : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
      {
          mouse_over = false;
          Debug.Log("Mouse exit");
-		 sfxMan.Dequip.Play();
+		 sfxMan.CMinc.Play();
 		 UItext.SetActive(false);
 		 UItext2.SetActive(false);
 		 UItext3.SetActive(false);

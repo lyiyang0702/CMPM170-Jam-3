@@ -11,6 +11,9 @@ public class AttackTarget : MonoBehaviour {
 	[SerializeField]
 	private string attackAnimation;
 
+	[SerializeField]
+	private AudioSource audioTrack;
+
 	//Is the attack magic?
 	[SerializeField]
 	private bool magicAttack;
@@ -392,6 +395,7 @@ public class AttackTarget : MonoBehaviour {
 			}
 			//Call Animator and play attack animation.
 			this.owner.GetComponent<Animator> ().Play (this.attackAnimation);
+			this.owner.GetComponent<AudioSource>().Play();
 			//Enemy Receives Damage
 			targetStats.receiveDamage (damage);
 			

@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
             }
 
             items.Add(item);
-            sfxMan.Dequip.Play();
+            sfxMan.menuBack.Play();
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             item.Use(this.gameObject);
