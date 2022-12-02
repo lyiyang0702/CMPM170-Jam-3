@@ -96,9 +96,12 @@ public class TurnSystem : MonoBehaviour {
 			if(RemainingTurns == 0){
 				if(currHP >= 200){
 					Debug.Log("PLAYER WINSSSSS!!!!");
+					this.enemyEncounter.GetComponent<CollectReward> ().collectReward ();
+					SceneManager.LoadScene ("Town");
 				}
 				else if(currHP < 200){
 					Debug.Log("GAME OVERRRRR!!!!");
+					SceneManager.LoadScene("Title");
 				}
 			}
 		}
