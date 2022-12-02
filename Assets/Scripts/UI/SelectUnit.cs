@@ -43,4 +43,10 @@ public class SelectUnit : MonoBehaviour {
 		Debug.Log("Attack Prefab YOLOOOO");
 		this.currentUnit.GetComponent<PlayerUnitAction>().act (possibleTargets[0]);
 	}
+
+	public int returnElement() {
+		int varElement = this.currentUnit.GetComponent<UnitStats>().element;
+		Debug.Log("THe current Element unit's element is" + varElement);
+		return varElement;
+	}
 }

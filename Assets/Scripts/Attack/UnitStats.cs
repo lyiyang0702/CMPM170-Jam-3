@@ -25,13 +25,25 @@ public class UnitStats : MonoBehaviour, IComparable {
 	public float defense;
 	public float speed;
 
+	public int element;
+
 	//
 	public int nextActTurn;
 
 	private bool dead = false;
 
+	public bool stun = false;
+
+
+	public bool isNotPlayer;
 	private float currentExperience;
 
+	public int FlameFistBuff;
+	public bool EmberSong;
+
+	public bool ThunderDance;
+
+	public int HurricaneVortex;
 	void Start() {
 		
 	}
@@ -75,5 +87,24 @@ public class UnitStats : MonoBehaviour, IComparable {
 	//Declaration for when the player recieves EXP from battles.
 	public void receiveExperience(float experience) {
 		this.currentExperience += experience;
+	}
+
+	public bool isStuned(){
+		return this.stun;
+	}
+
+	public bool resetStun(){
+		return !this.stun;
+	}
+
+	public bool isNotPlayable(){
+		return this.isNotPlayer;
+	}
+
+	public int returnFlameFist() {
+		return this.FlameFistBuff;
+	}
+	public bool emberEffect(){
+		return this.EmberSong;
 	}
 }

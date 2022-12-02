@@ -21,7 +21,7 @@ public class EnemyUnitAction : MonoBehaviour {
 
 	GameObject findRandomTarget() {
 		GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag (targetsTag);
-
+		
 		if (possibleTargets.Length > 0) {
 			int targetIndex = Random.Range (0, possibleTargets.Length);
 			GameObject target = possibleTargets [targetIndex];

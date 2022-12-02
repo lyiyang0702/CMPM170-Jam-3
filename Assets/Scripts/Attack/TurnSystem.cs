@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,7 +73,7 @@ public class TurnSystem : MonoBehaviour {
 
 			GameObject FBUI = GameObject.Find("FanBaseBar");
 			Vector2 objectScale = FBUI.transform.localScale;
-			FBUI.transform.localScale = new Vector2(objectScale.x * (currHP/200) ,  objectScale.y);
+			FBUI.transform.localScale = new Vector2(290 * (currHP/200) ,  objectScale.y);
 			//FIXME
 			//We probably don't need this area because we are not defeating all enemies as a win condition
 			//Or Lose when all players are dead.
@@ -98,9 +98,11 @@ public class TurnSystem : MonoBehaviour {
 		UnitStats currentUnitStats = unitsStats [0];
 		unitsStats.Remove (currentUnitStats);
 		//If the current Unit is alive, calculate who will go next.
-		if (!currentUnitStats.isDead ()) {
-			GameObject currentUnit = currentUnitStats.gameObject;
 
+		
+
+		if (!currentUnitStats.isDead () && !currentUnitStats.isNotPlayable() && !currentUnitStats.isStuned()) {
+			GameObject currentUnit = currentUnitStats.gameObject;
 			currentUnitStats.calculateNextActTurn (currentUnitStats.nextActTurn);
 			unitsStats.Add (currentUnitStats);
 			unitsStats.Sort ();
@@ -115,6 +117,7 @@ public class TurnSystem : MonoBehaviour {
 			RemainingTurns--;
 		} else {
 			//Go to next unit
+			Debug.Log("The Enemy is Stunned and can't move!");
 			RemainingTurns--;
 			this.nextTurn ();
 			
