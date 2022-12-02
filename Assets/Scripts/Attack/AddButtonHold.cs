@@ -15,21 +15,15 @@ public class AddButtonHold : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	[SerializeField] private GameObject TextBox;
 
-	private SFXManager sfxMan;
 
-	void Start()
-	{
-		sfxMan = FindObjectOfType<SFXManager>();
-	}
-
-	void Update()
+    void Update()
     {
 		
 		int Element = checkElement();
         if (mouse_over)
          {
-            Debug.Log("Mouse Over");
-			if (Element == 0){
+             Debug.Log("Mouse Over");
+			 if(Element == 0){
 				Debug.Log("Fire Element");
 				UItext.SetActive(true);
 
@@ -73,7 +67,6 @@ public class AddButtonHold : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
      {
          mouse_over = false;
          Debug.Log("Mouse exit");
-		 sfxMan.Dequip.Play();
 		 UItext.SetActive(false);
 		 UItext2.SetActive(false);
 		 UItext3.SetActive(false);

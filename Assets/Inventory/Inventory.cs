@@ -9,15 +9,10 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallback;
 
     public int space = 20;
+
  
     public List<Item> items = new List<Item>();
 
-    private SFXManager sfxMan;
-
-    void Start()
-    {
-        sfxMan = FindObjectOfType<SFXManager>();
-    }
 
     public bool Add(Item item)
     {
@@ -32,7 +27,7 @@ public class Inventory : MonoBehaviour
             }
 
             items.Add(item);
-            sfxMan.Dequip.Play();
+            
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             item.Use(this.gameObject);
